@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'random-real-address/version'
+require 'random_real_address/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "random-real-address"
+  spec.name          = "random_real_address"
   spec.version       = RandomRealAddress::VERSION
   spec.authors       = ["Estebam Arango Medina"]
   spec.email         = ["marranoparael31@gmail.com"]
