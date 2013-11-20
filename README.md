@@ -1,5 +1,7 @@
 # Random Real Address
 
+[![Dependency Status](https://gemnasium.com/esbanarango/random_real_address.png)](https://gemnasium.com/esbanarango/random_real_address)
+
 TODO: Write a gem description
 
 ## Installation
