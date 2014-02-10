@@ -1,3 +1,4 @@
+require 'csv'
 require 'httparty'
 require 'random_real_address/random_gaussian'
 
@@ -14,18 +15,29 @@ module RandomRealAddress
 	    @country = country
 	    @rad = rad
 	    @lenguage = lenguage
-
-	    @long = RandomGaussian.new(116467615, U).rand
-	    @lat = RandomGaussian.new(39923488, U).rand
+	    state = @@coords.sample
+	    @long = state[2].to_f
+	    @lat = state[1].to_f
 	    puts "#{@long}, #{@lat}"
 
 	  end
 
 	  def full_address
-	    r_lat = lat/V
-	    r_long = long/V
-	    response = HTTParty.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{r_lat},#{r_long}&sensor=false&language=#{lenguage}")
-	    # puts response.body, response.code, response.message, response.headers.inspect
+	    response = HTTParty.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{lat},#{long}&sensor=false&language=#{lenguage}")
+	    result = JSON.parse(response.body)
+	    puts result["results"].first['formatted_address']
+	    # puts , response.code, response.message, response.headers.inspect
 	  end
+
+ 		private
+
+    def self.load_fixtures
+      @@coords = []
+      CSV.foreach(File.expand_path('../fixtures/us_state_latlon.csv', __FILE__)) do |row|
+        @@coords << row
+      end
+    end
+
+
 	end
 end
