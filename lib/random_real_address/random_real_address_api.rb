@@ -23,6 +23,7 @@ module RandomRealAddress
 	  end
 
 	  def full_address
+	  	# Use this: https://github.com/alexreisner/geocoder#use-outside-of-rails
 	    response = HTTParty.get("http://maps.googleapis.com/maps/api/geocode/json?latlng=#{lat},#{long}&sensor=false&language=#{lenguage}")
 	    result = JSON.parse(response.body)
 	    puts result["results"].first['formatted_address']
